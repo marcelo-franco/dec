@@ -1,0 +1,19 @@
+###################### Filebeat Configuration Example 
+
+filebeat.inputs:
+- type: log
+  enabled: true
+  # Paths that should be crawled and fetched. Glob based paths.
+  paths:
+    # - /var/log/*.log
+    #- c:\programdata\elasticsearch\logs\*
+    #- C:\elasticstack\filebeat-5.5.1-windows-x86_64\logs\*
+    - /usr/share/app/app.log*
+    #- /usr/share/app/place1/app.log.*
+
+#----------------------------- Logstash output 
+output.logstash:
+
+  # The Logstash hosts
+
+  hosts: ["logstash:5044"]
