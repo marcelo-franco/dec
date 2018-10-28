@@ -20,3 +20,16 @@ discovery.type: single-node
 #
 xpack.license.self_generated.type: trial
 xpack.security.enabled: true
+
+# required for email notifications
+xpack.notification.email.account:
+    gmail_account:
+        profile: gmail
+        smtp:
+            auth: true
+            starttls.enable: true
+            host: smtp.gmail.com
+            port: 587
+            user: marcelo.franco.br@gmail.com
+            password: nhoupapgykviqeag
+            
