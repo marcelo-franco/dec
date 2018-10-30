@@ -3,7 +3,7 @@ version: '3.3'
 services:
 
   elasticsearch:
-    image: dockerelkcustomxp2_elasticsearch:latest
+    image: dec_elasticsearch:latest
     deploy:
       replicas: 1
     configs:
@@ -21,7 +21,7 @@ services:
        - data-elastic:/usr/share/elasticsearch/data
 
   kibana:
-    image: dockerelkcustomxp2_kibana:latest
+    image: dec_kibana:latest
     deploy:
       replicas: 1
     configs:
@@ -35,7 +35,7 @@ services:
        - data-kibana:/var/lib/kibana
 
   logstash:
-    image: dockerelkcustomxp2_logstash:latest
+    image: dec_logstash:latest
     deploy:
       replicas: 1
     configs:
@@ -54,7 +54,7 @@ services:
        - data-logstash:/var/lib/logstash
 
   store:
-    image: dockerelkcustomxp2_filebeat:latest
+    image: dec_filebeat:latest
     environment:
       - storeId="{{.Task.Name}}"
     command: ./wrapper-script.sh
