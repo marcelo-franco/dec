@@ -9,7 +9,7 @@ RUN yum install -y https://centos7.iuscommunity.org/ius-release.rpm
 RUN yum update -y
 RUN yum install -y python36u python36u-libs python36u-devel python36u-pip
 USER filebeat
-COPY --from=dockerelkcustom_loggen:latest --chown=filebeat /usr/share/app/*.py /usr/share/app/
-COPY --from=dockerelkcustom_loggen:latest --chown=filebeat /usr/share/app/config.json /usr/share/app
+COPY --from=dec_loggen:latest --chown=filebeat /usr/share/app/*.py /usr/share/app/
+COPY --from=dec_loggen:latest --chown=filebeat /usr/share/app/config.json /usr/share/app
 COPY wrapper-script.sh /usr/share/filebeat/
 
