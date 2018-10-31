@@ -7,6 +7,7 @@ services:
       context: elasticsearch/
       args:
         ELK_VERSION: $ELK_VERSION
+    image: dec_elasticsearch
     volumes:
       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
     ports:
@@ -23,6 +24,7 @@ services:
       context: logstash/
       args:
         ELK_VERSION: $ELK_VERSION
+    image: dec_logstash
     volumes:
       - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
       - ./logstash/pipeline:/usr/share/logstash/pipeline:ro
@@ -41,6 +43,7 @@ services:
       context: kibana/
       args:
         ELK_VERSION: $ELK_VERSION
+    image: dec_kibana
     volumes:
       - ./kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml:ro
     ports:
