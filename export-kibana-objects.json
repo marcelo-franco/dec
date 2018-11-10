@@ -17,23 +17,6 @@
     }
   },
   {
-    "_id": "30922ec0-d9fd-11e8-9571-a35638ec3e23",
-    "_type": "visualization",
-    "_source": {
-      "title": "Logs - Tipo/Mensagem/Instância/Componente",
-      "visState": "{\"aggs\":[{\"enabled\":true,\"id\":\"1\",\"params\":{\"customLabel\":\"Logs\"},\"schema\":\"metric\",\"type\":\"count\"},{\"enabled\":true,\"id\":\"2\",\"params\":{\"customLabel\":\"Tipo de Log\",\"field\":\"loglevel.keyword\",\"missingBucket\":false,\"missingBucketLabel\":\"Missing\",\"order\":\"desc\",\"orderBy\":\"1\",\"otherBucket\":false,\"otherBucketLabel\":\"Other\",\"size\":5},\"schema\":\"bucket\",\"type\":\"terms\"},{\"enabled\":true,\"id\":\"3\",\"params\":{\"customLabel\":\"Países\",\"field\":\"country.keyword\"},\"schema\":\"metric\",\"type\":\"cardinality\"},{\"enabled\":true,\"id\":\"4\",\"params\":{\"customLabel\":\"Mensagem\",\"field\":\"logmessage.keyword\",\"missingBucket\":false,\"missingBucketLabel\":\"Missing\",\"order\":\"desc\",\"orderBy\":\"1\",\"otherBucket\":false,\"otherBucketLabel\":\"Other\",\"size\":5},\"schema\":\"bucket\",\"type\":\"terms\"},{\"enabled\":true,\"id\":\"5\",\"params\":{\"customLabel\":\"Instância\",\"field\":\"appinstance.keyword\",\"missingBucket\":false,\"missingBucketLabel\":\"Missing\",\"order\":\"desc\",\"orderBy\":\"1\",\"otherBucket\":false,\"otherBucketLabel\":\"Other\",\"size\":20},\"schema\":\"bucket\",\"type\":\"terms\"},{\"enabled\":true,\"id\":\"6\",\"params\":{\"customLabel\":\"Componente\",\"field\":\"component.keyword\",\"missingBucket\":false,\"missingBucketLabel\":\"Missing\",\"order\":\"desc\",\"orderBy\":\"1\",\"otherBucket\":false,\"otherBucketLabel\":\"Other\",\"size\":5},\"schema\":\"bucket\",\"type\":\"terms\"},{\"enabled\":false,\"id\":\"7\",\"params\":{\"customLabel\":\"Função\",\"field\":\"functionname.keyword\",\"missingBucket\":false,\"missingBucketLabel\":\"Missing\",\"order\":\"desc\",\"orderBy\":\"1\",\"otherBucket\":false,\"otherBucketLabel\":\"Other\",\"size\":5},\"schema\":\"bucket\",\"type\":\"terms\"}],\"params\":{\"perPage\":20,\"showMetricsAtAllLevels\":false,\"showPartialRows\":false,\"showTotal\":false,\"sort\":{\"columnIndex\":0,\"direction\":\"asc\"},\"totalFunc\":\"sum\"},\"title\":\"Logs - Tipo/Mensagem/Instância/Componente\",\"type\":\"table\"}",
-      "uiStateJSON": "{\"vis\":{\"params\":{\"sort\":{\"columnIndex\":0,\"direction\":\"asc\"}}}}",
-      "description": "",
-      "version": 1,
-      "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"index\":\"558454b0-d935-11e8-b421-f3b6a0ad321e\",\"query\":{\"language\":\"lucene\",\"query\":\"\"},\"filter\":[]}"
-      }
-    },
-    "_meta": {
-      "savedObjectVersion": 2
-    }
-  },
-  {
     "_id": "45d9b4d0-dac8-11e8-9571-a35638ec3e23",
     "_type": "visualization",
     "_source": {
@@ -292,13 +275,30 @@
     }
   },
   {
+    "_id": "24b6d510-e501-11e8-86a5-1369e33ec8f4",
+    "_type": "visualization",
+    "_source": {
+      "title": "Erros críticos",
+      "visState": "{\"title\":\"Erros críticos\",\"type\":\"table\",\"params\":{\"perPage\":10,\"showPartialRows\":false,\"showMetricsAtAllLevels\":false,\"sort\":{\"columnIndex\":null,\"direction\":null},\"showTotal\":false,\"totalFunc\":\"sum\"},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"count\",\"schema\":\"metric\",\"params\":{\"customLabel\":\"Logs\"}},{\"id\":\"3\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"logmessage.keyword\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"1\",\"otherBucket\":false,\"otherBucketLabel\":\"Other\",\"missingBucket\":false,\"missingBucketLabel\":\"Missing\",\"customLabel\":\"Mensagem\"}},{\"id\":\"4\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"appinstance.keyword\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"1\",\"otherBucket\":false,\"otherBucketLabel\":\"Other\",\"missingBucket\":false,\"missingBucketLabel\":\"Missing\",\"customLabel\":\"Instância\"}},{\"id\":\"5\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"component.keyword\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"1\",\"otherBucket\":false,\"otherBucketLabel\":\"Other\",\"missingBucket\":false,\"missingBucketLabel\":\"Missing\",\"customLabel\":\"Componente\"}},{\"id\":\"6\",\"enabled\":true,\"type\":\"cardinality\",\"schema\":\"metric\",\"params\":{\"field\":\"country.keyword\",\"customLabel\":\"Países\"}}]}",
+      "uiStateJSON": "{\"vis\":{\"params\":{\"sort\":{\"columnIndex\":null,\"direction\":null}}}}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"558454b0-d935-11e8-b421-f3b6a0ad321e\",\"query\":{\"query\":\"\",\"language\":\"kuery\"},\"filter\":[{\"meta\":{\"index\":\"558454b0-d935-11e8-b421-f3b6a0ad321e\",\"negate\":false,\"disabled\":false,\"alias\":\"Erro crítico\",\"type\":\"phrase\",\"key\":\"loglevel.keyword\",\"value\":\"CRITICAL\",\"params\":{\"query\":\"CRITICAL\",\"type\":\"phrase\"}},\"query\":{\"match\":{\"loglevel.keyword\":{\"query\":\"CRITICAL\",\"type\":\"phrase\"}}},\"$state\":{\"store\":\"appState\"}}]}"
+      }
+    },
+    "_meta": {
+      "savedObjectVersion": 2
+    }
+  },
+  {
     "_id": "868ea6f0-d935-11e8-b421-f3b6a0ad321e",
     "_type": "dashboard",
     "_source": {
       "title": "Países monitorados",
       "hits": 0,
       "description": "Este dashboard reúne as principais visualizações criadas para monitoramento e análise dos logs armazenados no Elasticsearch",
-      "panelsJSON": "[{\"embeddableConfig\":{\"mapCenter\":[26.43122806450644,-18.281250000000004],\"mapZoom\":2},\"gridData\":{\"h\":23,\"i\":\"1\",\"w\":48,\"x\":0,\"y\":21},\"id\":\"777c9eb0-d935-11e8-b421-f3b6a0ad321e\",\"panelIndex\":\"1\",\"type\":\"visualization\",\"version\":\"6.4.2\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":10,\"i\":\"2\",\"w\":18,\"x\":0,\"y\":0},\"id\":\"d36dc3b0-d94f-11e8-9571-a35638ec3e23\",\"panelIndex\":\"2\",\"type\":\"visualization\",\"version\":\"6.4.2\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":10,\"i\":\"3\",\"w\":30,\"x\":18,\"y\":0},\"id\":\"56bac0c0-d954-11e8-9571-a35638ec3e23\",\"panelIndex\":\"3\",\"type\":\"visualization\",\"version\":\"6.4.2\"},{\"embeddableConfig\":{\"vis\":{\"colors\":{\"Lojas\":\"#447EBC\"},\"legendOpen\":false}},\"gridData\":{\"h\":11,\"i\":\"4\",\"w\":22,\"x\":26,\"y\":10},\"id\":\"29230dc0-d959-11e8-9571-a35638ec3e23\",\"panelIndex\":\"4\",\"type\":\"visualization\",\"version\":\"6.4.2\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":11,\"i\":\"6\",\"w\":13,\"x\":0,\"y\":10},\"id\":\"37eefa60-d95b-11e8-9571-a35638ec3e23\",\"panelIndex\":\"6\",\"type\":\"visualization\",\"version\":\"6.4.2\"},{\"embeddableConfig\":{\"vis\":{\"params\":{\"sort\":{\"columnIndex\":1,\"direction\":\"desc\"}}}},\"gridData\":{\"h\":22,\"i\":\"7\",\"w\":26,\"x\":0,\"y\":44},\"id\":\"04abae70-d963-11e8-9571-a35638ec3e23\",\"panelIndex\":\"7\",\"type\":\"visualization\",\"version\":\"6.4.2\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":8,\"i\":\"8\",\"w\":22,\"x\":26,\"y\":44},\"id\":\"cbe5b050-d957-11e8-9571-a35638ec3e23\",\"panelIndex\":\"8\",\"type\":\"visualization\",\"version\":\"6.4.2\"},{\"embeddableConfig\":{\"vis\":{\"legendOpen\":false}},\"gridData\":{\"h\":14,\"i\":\"9\",\"w\":22,\"x\":26,\"y\":52},\"id\":\"2eca4760-d9fa-11e8-9571-a35638ec3e23\",\"panelIndex\":\"9\",\"type\":\"visualization\",\"version\":\"6.4.2\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":30,\"i\":\"10\",\"w\":48,\"x\":0,\"y\":66},\"id\":\"30922ec0-d9fd-11e8-9571-a35638ec3e23\",\"panelIndex\":\"10\",\"type\":\"visualization\",\"version\":\"6.4.2\"},{\"embeddableConfig\":{},\"gridData\":{\"h\":14,\"i\":\"11\",\"w\":48,\"x\":0,\"y\":96},\"id\":\"45d9b4d0-dac8-11e8-9571-a35638ec3e23\",\"panelIndex\":\"11\",\"type\":\"visualization\",\"version\":\"6.4.2\"},{\"embeddableConfig\":{\"vis\":{\"defaultColors\":{\"0 - 100\":\"rgb(0,104,55)\"},\"legendOpen\":false}},\"gridData\":{\"h\":11,\"i\":\"12\",\"w\":13,\"x\":13,\"y\":10},\"id\":\"5fef0150-e2bf-11e8-86a5-1369e33ec8f4\",\"panelIndex\":\"12\",\"type\":\"visualization\",\"version\":\"6.4.2\"}]",
+      "panelsJSON": "[{\"embeddableConfig\":{\"mapCenter\":[26.43122806450644,-18.281250000000004],\"mapZoom\":2},\"gridData\":{\"x\":0,\"y\":21,\"w\":48,\"h\":23,\"i\":\"1\"},\"id\":\"777c9eb0-d935-11e8-b421-f3b6a0ad321e\",\"panelIndex\":\"1\",\"type\":\"visualization\",\"version\":\"6.4.2\"},{\"embeddableConfig\":{},\"gridData\":{\"x\":0,\"y\":0,\"w\":18,\"h\":10,\"i\":\"2\"},\"id\":\"d36dc3b0-d94f-11e8-9571-a35638ec3e23\",\"panelIndex\":\"2\",\"type\":\"visualization\",\"version\":\"6.4.2\"},{\"embeddableConfig\":{},\"gridData\":{\"x\":18,\"y\":0,\"w\":30,\"h\":10,\"i\":\"3\"},\"id\":\"56bac0c0-d954-11e8-9571-a35638ec3e23\",\"panelIndex\":\"3\",\"type\":\"visualization\",\"version\":\"6.4.2\"},{\"embeddableConfig\":{\"vis\":{\"colors\":{\"Lojas\":\"#447EBC\"},\"legendOpen\":false}},\"gridData\":{\"x\":26,\"y\":10,\"w\":22,\"h\":11,\"i\":\"4\"},\"id\":\"29230dc0-d959-11e8-9571-a35638ec3e23\",\"panelIndex\":\"4\",\"type\":\"visualization\",\"version\":\"6.4.2\"},{\"embeddableConfig\":{},\"gridData\":{\"x\":0,\"y\":10,\"w\":13,\"h\":11,\"i\":\"6\"},\"id\":\"37eefa60-d95b-11e8-9571-a35638ec3e23\",\"panelIndex\":\"6\",\"type\":\"visualization\",\"version\":\"6.4.2\"},{\"embeddableConfig\":{\"vis\":{\"params\":{\"sort\":{\"columnIndex\":1,\"direction\":\"desc\"}}}},\"gridData\":{\"x\":0,\"y\":44,\"w\":26,\"h\":22,\"i\":\"7\"},\"id\":\"04abae70-d963-11e8-9571-a35638ec3e23\",\"panelIndex\":\"7\",\"type\":\"visualization\",\"version\":\"6.4.2\"},{\"embeddableConfig\":{},\"gridData\":{\"x\":26,\"y\":44,\"w\":22,\"h\":8,\"i\":\"8\"},\"id\":\"cbe5b050-d957-11e8-9571-a35638ec3e23\",\"panelIndex\":\"8\",\"type\":\"visualization\",\"version\":\"6.4.2\"},{\"embeddableConfig\":{\"vis\":{\"legendOpen\":false}},\"gridData\":{\"x\":26,\"y\":52,\"w\":22,\"h\":14,\"i\":\"9\"},\"id\":\"2eca4760-d9fa-11e8-9571-a35638ec3e23\",\"panelIndex\":\"9\",\"type\":\"visualization\",\"version\":\"6.4.2\"},{\"embeddableConfig\":{},\"gridData\":{\"x\":0,\"y\":86,\"w\":48,\"h\":14,\"i\":\"11\"},\"id\":\"45d9b4d0-dac8-11e8-9571-a35638ec3e23\",\"panelIndex\":\"11\",\"type\":\"visualization\",\"version\":\"6.4.2\"},{\"embeddableConfig\":{\"vis\":{\"defaultColors\":{\"0 - 100\":\"rgb(0,104,55)\"},\"legendOpen\":false}},\"gridData\":{\"x\":13,\"y\":10,\"w\":13,\"h\":11,\"i\":\"12\"},\"id\":\"5fef0150-e2bf-11e8-86a5-1369e33ec8f4\",\"panelIndex\":\"12\",\"type\":\"visualization\",\"version\":\"6.4.2\"},{\"gridData\":{\"x\":0,\"y\":66,\"w\":48,\"h\":20,\"i\":\"13\"},\"version\":\"6.4.2\",\"panelIndex\":\"13\",\"type\":\"visualization\",\"id\":\"24b6d510-e501-11e8-86a5-1369e33ec8f4\",\"embeddableConfig\":{\"vis\":{\"params\":{\"sort\":{\"columnIndex\":0,\"direction\":null}}}}}]",
       "optionsJSON": "{\"darkTheme\":false,\"hidePanelTitles\":false,\"useMargins\":true}",
       "version": 1,
       "timeRestore": false,
