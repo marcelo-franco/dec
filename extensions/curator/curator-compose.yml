@@ -2,16 +2,19 @@ version: '2'
 
 services:
 
-
   curator:
     build:
       context: extensions/curator/
+    image: dec_curator
     environment:
       ELASTICSEARCH_HOST: elasticsearch
       CRON: 0 0 * * *
       CONFIG_FILE: /usr/share/curator/config/curator.yml
       COMMAND: /usr/share/curator/config/delete_log_files_curator.yml
-      UNIT_COUNT: 2
+      UNIT_COUNT: 8
+    volumes:
+      - ./config/curator.yml:/usr/share/curator/config/curator.yml:ro
+      - ./config/delete_log_files_curator.yml:/usr/share/curator/config/delete_log_files_curator.yml:ro
     networks:
       - elk
     depends_on:
