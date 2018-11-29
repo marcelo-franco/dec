@@ -3,25 +3,33 @@ version: '3.3'
 services:
 
   elasticsearch:
-    image: dec_elasticsearch:latest
+    image: localhost:5000/dec_elasticsearch:latest
     deploy:
       replicas: 1
     configs:
       - source: elastic_config
         target: /usr/share/elasticsearch/config/elasticsearch.yml
     ports:
-      - "9200:9200"
-      - "9300:9300"
+      - "9200"
+      - "9300"
     environment:
       ES_JAVA_OPTS: "-Xmx1g -Xms1g"
       ELASTIC_PASSWORD: changeme
+      # use 'zen' discovery plugin
+      discovery.type: zen
+      # use internal Docker round-robin DNS for unicast discovery
+      discovery.zen.ping.unicast.hosts: tasks.elasticsearch
+      discovery.zen.minimum_master_nodes: 2
+      #node.master: "true"
+      #node.data: "true"
+      node.max_local_storage_nodes: 3
     networks:
       - elk
     volumes:
        - data-elastic:/usr/share/elasticsearch/data
 
   kibana:
-    image: dec_kibana:latest
+    image: localhost:5000/dec_kibana:latest
     deploy:
       replicas: 1
     configs:
@@ -35,7 +43,7 @@ services:
        - data-kibana:/var/lib/kibana
 
   logstash:
-    image: dec_logstash:latest
+    image: localhost:5000/dec_logstash:latest
     deploy:
       replicas: 1
     configs:
@@ -54,12 +62,27 @@ services:
        - data-logstash:/var/lib/logstash
 
   store:
-    image: dec_filebeat:latest
+    image: localhost:5000/dec_filebeat:latest
     environment:
       - storeId="{{.Task.Name}}"
     command: ./wrapper-script.sh
     deploy:
-      replicas: 30
+      replicas: 10
+    networks:
+      - elk
+  
+  registry:
+    image: registry:2
+    ports:
+      - 5000:5000
+    volumes:
+       - data-registry:/var/lib/registry
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+              - node.role == manager
+              - node.labels.registry == true
     networks:
       - elk
 
@@ -80,3 +103,4 @@ volumes:
   data-elastic:
   data-kibana:
   data-logstash:
+  data-registry:

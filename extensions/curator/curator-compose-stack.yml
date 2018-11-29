@@ -3,7 +3,7 @@ version: '3.3'
 services:
 
   curator:
-    image: dec_curator:latest
+    image: localhost:5000/dec_curator:latest
     environment:
       ELASTICSEARCH_HOST: elasticsearch
       CRON: 0 0 * * *
