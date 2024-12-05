@@ -1,6 +1,0 @@
-apm-server:
-  host: localhost:8200
-
-output:
-  elasticsearch:
-    hosts: http://elasticsearch:9200
