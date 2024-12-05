@@ -1,0 +1,82 @@
+version: '3.3'
+
+services:
+
+  elasticsearch:
+    image: dec_elasticsearch:latest
+    deploy:
+      replicas: 1
+    configs:
+      - source: elastic_config
+        target: /usr/share/elasticsearch/config/elasticsearch.yml
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      ES_JAVA_OPTS: "-Xmx1g -Xms1g"
+      ELASTIC_PASSWORD: changeme
+    networks:
+      - elk
+    volumes:
+       - data-elastic:/usr/share/elasticsearch/data
+
+  kibana:
+    image: dec_kibana:latest
+    deploy:
+      replicas: 1
+    configs:
+      - source: kibana_config
+        target: /usr/share/kibana/config/kibana.yml
+    ports:
+      - "5601:5601"
+    networks:
+      - elk
+    volumes:
+       - data-kibana:/var/lib/kibana
+
+  logstash:
+    image: dec_logstash:latest
+    deploy:
+      replicas: 1
+    configs:
+      - source: logstash_config
+        target: /usr/share/logstash/config/logstash.yml
+      - source: logstash_pipeline
+        target: /usr/share/logstash/pipeline/logstash.conf    
+    ports:
+      - "5044:5044"
+      - "9600:9600"
+    environment:
+      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+    networks:
+      - elk
+    volumes:
+       - data-logstash:/var/lib/logstash
+
+  store:
+    image: dec_filebeat:latest
+    environment:
+      - storeId="{{.Task.Name}}"
+    command: ./wrapper-script.sh
+    deploy:
+      replicas: 30
+    networks:
+      - elk
+
+configs:
+
+  elastic_config:
+    file: ./elasticsearch/config/elasticsearch.yml
+  logstash_config:
+    file: ./logstash/config/logstash.yml
+  logstash_pipeline:
+    file: ./logstash/pipeline/logstash.conf
+  kibana_config:
+    file: ./kibana/config/kibana.yml
+
+networks:
+  elk:
+volumes:
+  data-elastic:
+  data-kibana:
+  data-logstash:

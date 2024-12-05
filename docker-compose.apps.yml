@@ -1,0 +1,33 @@
+version: '2'
+
+services:
+
+  loggen:
+    build:
+      context: loggen/
+      args:
+        ELK_VERSION: $ELK_VERSION
+        storeId: 10
+    image: dec_loggen
+    volumes:
+      - app1-vol:/usr/share/app
+    networks:
+      - elk
+    
+  filebeat:
+    build:
+      context: filebeat/
+      args:
+        ELK_VERSION: $ELK_VERSION
+    image: dec_filebeat
+    command: filebeat -e -strict.perms=false
+    volumes:
+      - app1-vol:/usr/share/app
+      - ./filebeat/config/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
+    networks:
+      - elk
+    depends_on:
+      - loggen
+
+volumes:
+  app1-vol:

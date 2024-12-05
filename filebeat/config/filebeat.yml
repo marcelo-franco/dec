@@ -1,0 +1,15 @@
+###################### Filebeat Configuration Example 
+
+filebeat.inputs:
+- type: filestream
+  enabled: true
+  # Paths that should be crawled and fetched. Glob based paths.
+  paths:
+    - /usr/share/app/app.log*
+
+#----------------------------- Logstash output 
+output.logstash:
+
+  # The Logstash hosts
+
+  hosts: ["logstash:5044"]
