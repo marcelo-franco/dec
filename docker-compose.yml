@@ -21,6 +21,7 @@ services:
       context: setup/
       args:
         ELASTIC_VERSION: ${ELASTIC_VERSION}
+    image: dec_setup:latest
     init: true
     volumes:
       - ./setup/entrypoint.sh:/entrypoint.sh:ro,Z
@@ -45,6 +46,7 @@ services:
       context: elasticsearch/
       args:
         ELASTIC_VERSION: ${ELASTIC_VERSION}
+    image: dec_elasticsearch:latest
     volumes:
       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro,Z
       - elasticsearch:/usr/share/elasticsearch/data:Z
@@ -70,10 +72,10 @@ services:
       context: logstash/
       args:
         ELASTIC_VERSION: ${ELASTIC_VERSION}
+    image: dec_logstash:latest
     volumes:
       - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro,Z
       - ./logstash/pipeline:/usr/share/logstash/pipeline:ro,Z
-      - ./data/logstash:/var/lib/logstash
     ports:
       - 5044:5044
       - 50000:50000/tcp
@@ -93,9 +95,9 @@ services:
       context: kibana/
       args:
         ELASTIC_VERSION: ${ELASTIC_VERSION}
+    image: dec_kibana:latest
     volumes:
       - ./kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml:ro,Z
-      - ./data/kibana:/var/lib/kibana  
     ports:
       - 5601:5601
     environment:
@@ -108,7 +110,5 @@ services:
 
 networks:
   elk:
-    driver: bridge
-
 volumes:
   elasticsearch:

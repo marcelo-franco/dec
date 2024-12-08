@@ -8,4 +8,4 @@ node.name: logstash
 
 monitoring.enabled: false
 
-
+#log.level: debug

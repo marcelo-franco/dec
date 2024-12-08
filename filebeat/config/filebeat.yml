@@ -2,6 +2,7 @@
 
 filebeat.inputs:
 - type: filestream
+  id: filebeat-id
   enabled: true
   # Paths that should be crawled and fetched. Glob based paths.
   paths:
@@ -13,3 +14,9 @@ output.logstash:
   # The Logstash hosts
 
   hosts: ["logstash:5044"]
+
+# ================================== Logging ===================================
+
+# Sets log level. The default log level is info.
+# Available log levels are: error, warning, info, debug
+logging.level: debug

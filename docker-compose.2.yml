@@ -14,17 +14,17 @@ services:
   # due to the non-default profile it belongs to. To run it, either provide the
   # '--profile=setup' CLI flag to Compose commands, or "up" the service by name
   # such as 'docker compose up setup'.
+
   setup:
-    profiles:
-      - setup
-    build:
-      context: setup/
-      args:
-        ELASTIC_VERSION: ${ELASTIC_VERSION}
+    image: dec_setup:latest
+    deploy:
+      restart_policy:
+        condition: on-failure
+        max_attempts: 3
     init: true
     volumes:
       - ./setup/entrypoint.sh:/entrypoint.sh:ro,Z
-      - ./setup/lib.sh:/lib.sh:ro,Z
+      - ./setup/lib.sh:/lib.sh:ro,Z 
       - ./setup/roles:/roles:ro,Z
     environment:
       ELASTIC_PASSWORD: ${ELASTIC_PASSWORD:-}
@@ -39,12 +39,9 @@ services:
       - elk
     depends_on:
       - elasticsearch
-
+  
   elasticsearch:
-    build:
-      context: elasticsearch/
-      args:
-        ELASTIC_VERSION: ${ELASTIC_VERSION}
+    image: dec_elasticsearch:latest
     volumes:
       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro,Z
       - elasticsearch:/usr/share/elasticsearch/data:Z
@@ -63,17 +60,12 @@ services:
       discovery.type: single-node
     networks:
       - elk
-    restart: unless-stopped
 
   logstash:
-    build:
-      context: logstash/
-      args:
-        ELASTIC_VERSION: ${ELASTIC_VERSION}
+    image: dec_logstash:latest
     volumes:
       - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro,Z
       - ./logstash/pipeline:/usr/share/logstash/pipeline:ro,Z
-      - ./data/logstash:/var/lib/logstash
     ports:
       - 5044:5044
       - 50000:50000/tcp
@@ -86,16 +78,11 @@ services:
       - elk
     depends_on:
       - elasticsearch
-    restart: unless-stopped
 
   kibana:
-    build:
-      context: kibana/
-      args:
-        ELASTIC_VERSION: ${ELASTIC_VERSION}
+    image: dec_kibana:latest
     volumes:
       - ./kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml:ro,Z
-      - ./data/kibana:/var/lib/kibana  
     ports:
       - 5601:5601
     environment:
@@ -104,10 +91,9 @@ services:
       - elk
     depends_on:
       - elasticsearch
-    restart: unless-stopped
 
   store:
-    image: dec_filebeat
+    image: dec_filebeat:latest
     environment:
       - storeId="{{.Task.Name}}"
     command: ./wrapper-script.sh
@@ -118,7 +104,6 @@ services:
 
 networks:
   elk:
-    driver: bridge
 
 volumes:
   elasticsearch:

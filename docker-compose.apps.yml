@@ -6,7 +6,7 @@ services:
       args:
         ELASTIC_VERSION: $ELASTIC_VERSION
         storeId: 10
-    image: dec_loggen
+    image: dec_loggen:latest
     volumes:
       - app1-vol:/usr/share/app
     
@@ -15,7 +15,7 @@ services:
       context: filebeat/
       args:
         ELASTIC_VERSION: $ELASTIC_VERSION
-    image: dec_filebeat
+    image: dec_filebeat:latest
     command: filebeat -e -strict.perms=false
     volumes:
       - app1-vol:/usr/share/app
