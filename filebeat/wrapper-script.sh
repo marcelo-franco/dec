@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-# Start the first process
+# Start the first process (filebeat)
 cd /usr/share/filebeat
 ./filebeat -e -strict.perms=false &
 status=$?
@@ -9,7 +9,7 @@ if [ $status -ne 0 ]; then
   exit $status
 fi
 
-# Start the second process
+# Start the second process (loggen)
 cd /usr/share/app
 python3 loggen.py -s "${storeId}" &
 status=$?
