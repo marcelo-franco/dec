@@ -50,7 +50,7 @@ services:
       - 9300:9300
     environment:
       node.name: elasticsearch
-      ES_JAVA_OPTS: -Xmx4g -Xms4g
+      ES_JAVA_OPTS: -Xmx2g -Xms2g
       # Bootstrap password.
       # Used to initialize the keystore during the initial startup of
       # Elasticsearch. Ignored on subsequent runs.
