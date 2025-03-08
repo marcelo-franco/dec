@@ -10,3 +10,16 @@ network.host: 0.0.0.0
 #
 xpack.license.self_generated.type: trial
 xpack.security.enabled: true
+
+# required for email notifications
+xpack.notification.email.account:
+   gmail_account:
+       profile: gmail
+       smtp:
+           auth: true
+           starttls.enable: true
+           host: smtp.gmail.com
+           port: 587
+           user: meu.email@gmail.com 
+
+

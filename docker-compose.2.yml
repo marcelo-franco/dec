@@ -45,6 +45,7 @@ services:
     volumes:
       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro,Z
       - elasticsearch:/usr/share/elasticsearch/data:Z
+      - elasticsearch_config:/usr/share/elasticsearch/config
     ports:
       - 9200:9200
       - 9300:9300
@@ -107,3 +108,18 @@ networks:
 
 volumes:
   elasticsearch:
+  elasticsearch_config: # Define the docker volume for keystore
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
